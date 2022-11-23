@@ -5,10 +5,63 @@
 // If an 'Add' link is clicked, adds the item as a new list item with
 // addListItem function has been started to help you get going!
 // Make sure to add an event listener(s) to your new <li> (if needed)
+
+// 
+
+
+
+
+const changeClass = function(e) {
+  e.preventDefault();
+  console.log(this.parentNode);
+  this.parentNode.className = 'done';
+}
+
+/*
+// Remove (delete) the last paragraph
+// (starts with "Available for purchase now…")
+
+const mainEl = document.getElementsByTagName('main')[0];
+mainEl.removeAttribute('p');
+*/
+
+const deleteEl = function(e) {
+  e.preventDefault();
+  this.parentNode.parentNode.removeChild(this.parentNode);
+}
+
 const addListItem = function(e) {
   e.preventDefault();
   const input = this.parentNode.getElementsByTagName('input')[0];
   const text = input.value; // use this text to create a new <li>
 
-  // Finish function here
+  const li_el = document.createElement('li');
+  const li_span = document.createElement('span');
+  const li_textNode = document.createTextNode(text);
+  const li_delete = document.createElement('a');
+  li_delete.classList.add('delete');
+  li_span.addEventListener('click', changeClass);
+  li_delete.addEventListener('click', deleteEl);
+  li_delete.appendChild(document.createTextNode('delete'));
+  li_span.appendChild(li_textNode);
+  li_el.appendChild(li_span);
+  li_el.appendChild(li_delete);
+  
+
+  const ul = this.parentNode.parentNode.getElementsByTagName('ul')[0];
+  ul.appendChild(li_el);
+
 };
+
+
+
+
+const spans = document.querySelectorAll('span');
+const deleters = document.querySelectorAll(".delete");
+console.log('deleters are ', deleters);
+deleters.forEach(del => del.addEventListener('click', deleteEl));
+spans.forEach(span => span.addEventListener('click', changeClass));
+const addbtn = document.getElementsByClassName('add-item');
+addbtn[0].addEventListener('click', addListItem);
+
+
