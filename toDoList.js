@@ -6,7 +6,7 @@
 // addListItem function has been started to help you get going!
 // Make sure to add an event listener(s) to your new <li> (if needed)
 
-// 
+
 
 
 
@@ -16,14 +16,6 @@ const changeClass = function(e) {
   console.log(this.parentNode);
   this.parentNode.className = 'done';
 }
-
-/*
-// Remove (delete) the last paragraph
-// (starts with "Available for purchase now…")
-
-const mainEl = document.getElementsByTagName('main')[0];
-mainEl.removeAttribute('p');
-*/
 
 const deleteEl = function(e) {
   e.preventDefault();
@@ -39,7 +31,7 @@ const addListItem = function(e) {
   const li_span = document.createElement('span');
   const li_textNode = document.createTextNode(text);
   const li_delete = document.createElement('a');
-  li_delete.classList.add('delete');
+  li_delete.classList.add('delete'); // I feel like this could be done more cleanly
   li_span.addEventListener('click', changeClass);
   li_delete.addEventListener('click', deleteEl);
   li_delete.appendChild(document.createTextNode('delete'));
@@ -55,12 +47,13 @@ const addListItem = function(e) {
 
 
 
-
+// Initialize existing elements to have event listeners
 const spans = document.querySelectorAll('span');
 const deleters = document.querySelectorAll(".delete");
-console.log('deleters are ', deleters);
 deleters.forEach(del => del.addEventListener('click', deleteEl));
 spans.forEach(span => span.addEventListener('click', changeClass));
+
+// Add button 
 const addbtn = document.getElementsByClassName('add-item');
 addbtn[0].addEventListener('click', addListItem);
 
